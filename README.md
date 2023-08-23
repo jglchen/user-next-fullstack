@@ -8,5 +8,6 @@ Laravel Breeze&apos;s default view layer is made up of simple Blade templates st
 In this project, Prisma as an ORM is used to manage the database, as Eloquent is adopted to connect Laravel with the database.
 
 ### [View the App](https://user-next-fullstack.vercel.app)
+### [App GitHub](https://github.com/jglchen/user-next-fullstack)
 ### Docker: docker run -p 3000:3000 jglchen/user-next-fullstack
 
