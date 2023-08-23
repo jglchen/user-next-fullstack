@@ -1,0 +1,10 @@
+services:
+  app:
+    image: jglchen/user-next-fullstack
+    ports:
+      - 3000:3000
+    volumes:
+      - prisma-sqlite:/app/prisma
+
+volumes:
+  prisma-sqlite:
