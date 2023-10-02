@@ -16,7 +16,7 @@ const Profile = () => {
                 </h2>
             }>
             <Head>
-                <title>Profile - Laravel Backend with Next.js Frontend</title>
+                <title>Profile - Next.js Fullstack Emulating Laravel Breeze</title>
             </Head>
 
             <div className="py-12">

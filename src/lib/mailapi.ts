@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
-import getConfig from "next/config";
-const { serverRuntimeConfig } = getConfig();
+import { SENDER_MAIL_HOST, SENDER_MAIL_PORT, SENDER_MAIL_USER, SENDER_USER_PASSWORD, SECURE_CONNECTION, TLS_CIPHERS} from '@/lib/envariables';
+
 
 interface MailTransportType {
      host: string;
@@ -17,14 +17,14 @@ interface MailTransportType {
 
 //Outlook
 export const outlookTransporter = nodemailer.createTransport({
-    host: serverRuntimeConfig.SENDER_MAIL_HOST, // hostname
-    secureConnection: serverRuntimeConfig.SECURE_CONNECTION, // TLS requires secureConnection to be false
-    port: serverRuntimeConfig.SENDER_MAIL_PORT, // port for secure SMTP
+    host: SENDER_MAIL_HOST, // hostname
+    secureConnection: SECURE_CONNECTION, // TLS requires secureConnection to be false
+    port: SENDER_MAIL_PORT, // port for secure SMTP
     tls: {
-        ciphers:serverRuntimeConfig.TLS_CIPHERS
+        ciphers:TLS_CIPHERS
     },
     auth: {
-        user: serverRuntimeConfig.SENDER_MAIL_USER,
-        pass: serverRuntimeConfig.SENDER_USER_PASSWORD
+        user: SENDER_MAIL_USER,
+        pass: SENDER_USER_PASSWORD
     }
 } as MailTransportType);

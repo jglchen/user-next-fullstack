@@ -1,5 +1,5 @@
 import CryptoJS from 'crypto-js';
-const CRYPTO_SECRET_KEY: string = process.env.NEXT_PUBLIC_CRYPTO_SECRET_KEY as string;
+import { CRYPTO_SECRET_KEY } from '@/lib/envariables';
 
 export const encryptSessionData = (key: string, data: object | string)=> {
     const dataStr = typeof data === 'string' ? data: JSON.stringify(data);

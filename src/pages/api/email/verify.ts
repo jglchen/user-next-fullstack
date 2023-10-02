@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma';
 import jwt from 'jsonwebtoken';
-const APP_SECRET = process.env.NEXT_PUBLIC_JWT_APP_SECRET as string;
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { JWT_APP_SECRET } from '@/lib/envariables';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST'){
@@ -11,8 +11,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     try {
         const { id, hash, expires, signature} = req.body;
-        const {email} = jwt.verify(hash, APP_SECRET) as {email: string};
-        const signatureObj = jwt.verify(signature, APP_SECRET) as {email: string; current: string};
+        const {email} = jwt.verify(hash, JWT_APP_SECRET) as {email: string};
+        const signatureObj = jwt.verify(signature, JWT_APP_SECRET) as {email: string; current: string};
         if (email !== signatureObj.email){
             res.status(403).json({ status: 'fail', message: 'Invalid signature'});
         }

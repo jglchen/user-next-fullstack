@@ -1,9 +1,9 @@
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-const APP_SECRET = process.env.NEXT_PUBLIC_JWT_APP_SECRET as string;
 import type { NextApiRequest, NextApiResponse } from 'next';
 import validateRegisterAPI from '@/validate/register-api';
+import { JWT_APP_SECRET } from '@/lib/envariables';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST'){
@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             updated_at: new Date()
         }});
         user.password = '';
-        const token = jwt.sign({ userId: user.id, email, issued_at: new Date() }, APP_SECRET);
+        const token = jwt.sign({ userId: user.id, email, issued_at: new Date() }, JWT_APP_SECRET);
 
         const result = {
             message: 'User created successfully',

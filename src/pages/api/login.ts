@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
-const APP_SECRET = process.env.NEXT_PUBLIC_JWT_APP_SECRET as string;
 import type { NextApiRequest, NextApiResponse } from 'next';
 import validateLoginAPI from '@/validate/login-api';
+import { JWT_APP_SECRET } from '@/lib/envariables';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST'){
@@ -17,7 +17,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return; 
         }
         const user = validateResult.user;
-        const token = jwt.sign({ userId: user?.id, email, issued_at: new Date() }, APP_SECRET);
+  
+        const token = jwt.sign({ userId: user?.id, email, issued_at: new Date() }, JWT_APP_SECRET);
 
         const result = {
             user,
@@ -27,7 +28,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
         }
         res.status(200).json(result);
-    
     } catch (e) {
         res.status(400).end();
     }

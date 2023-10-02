@@ -1,10 +1,10 @@
 import prisma from '@/lib/prisma';
 import jwt from 'jsonwebtoken';
-const APP_SECRET = process.env.NEXT_PUBLIC_JWT_APP_SECRET as string;
 import type { NextApiRequest, NextApiResponse } from 'next';
 import getAuthUser from '@/validate/authentication';
 import validateUpdateProfileAPI from '@/validate/update-profile-api';
 import { UserJwtPayload } from '@/lib/types';
+import { JWT_APP_SECRET } from '@/lib/envariables';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'PATCH' && req.method !== 'PUT'){
@@ -37,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             },
         });
         updateUser.password = '';
-        const token = jwt.sign({ userId, email, current: new Date() }, APP_SECRET);
+        const token = jwt.sign({ userId, email, current: new Date() }, JWT_APP_SECRET);
 
         const result = {
             message: 'Profile successfully updated',

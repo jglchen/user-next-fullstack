@@ -10,7 +10,7 @@ const Dashboard = () => {
                 </h2>
             }>
             <Head>
-                <title>Dashboard - Laravel Backend with Next.js Frontend</title>
+                <title>Dashboard - Next.js Fullstack Emulating Laravel Breeze</title>
             </Head>
 
             <div className="py-12">

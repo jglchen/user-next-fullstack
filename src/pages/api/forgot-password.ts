@@ -1,12 +1,10 @@
 import jwt from 'jsonwebtoken';
-const APP_SECRET = process.env.NEXT_PUBLIC_JWT_APP_SECRET as string;
 import type { NextApiRequest, NextApiResponse } from 'next';
 import validateForgotPasswordAPI from '@/validate/forgot-password-api';
 import { outlookTransporter } from '@/lib/mailapi';
 import { getHostURL } from '@/lib/hosturl';
 import { passwdResetHTML } from '@/lib/smtpmailhttml';
-import getConfig from "next/config";
-const { serverRuntimeConfig } = getConfig();
+import { JWT_APP_SECRET, SENDER_MAIL_USER } from '@/lib/envariables';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST'){
@@ -22,10 +20,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return; 
         }
         const user = validateResult.user;
-        const token = jwt.sign({ userId: user?.id, email, current: new Date() }, APP_SECRET);
+        const token = jwt.sign({ userId: user?.id, email, current: new Date() }, JWT_APP_SECRET);
         
         const emailTransporter = outlookTransporter;
-        const senderMail = serverRuntimeConfig.SENDER_MAIL_USER as string;
+        const senderMail = SENDER_MAIL_USER;
         const host = hosturl ? hosturl: getHostURL();
 
         // setup e-mail data, even with unicode symbols
