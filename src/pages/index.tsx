@@ -29,7 +29,7 @@ export default function Home() {
 
               <div className="p-6">
                 <div className="ml-12">
-                  <div className="mt-2 text-gray-600 dark:text-gray-400 text-base">
+                  <div className="mt-2 text-gray-600 dark:text-gray-200 text-base">
                     <p>
                     Laravel Breeze is an implementation of all of Laravel&apos;s authentication features, including login, registration, password reset, email verification, and password confirmation.
                     Breeze includes a simple &quot;profile&quot; page where the user may update their name, email address, and password.
@@ -46,7 +46,7 @@ export default function Home() {
           </div>
  
           <div className="flex justify-center mt-4 sm:items-center sm:justify-between">
-            <div className="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
+            <div className="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
             Next.js Fullstack Emulating Laravel Breeze
             </div>
           </div>
